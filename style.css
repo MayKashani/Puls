@@ -13,6 +13,10 @@
        
 }
 
+img {
+  height: 50%;
+  width: auto
+}
 #main {
     margin: 30px auto;
     width: 80%;
@@ -42,15 +46,14 @@
 
 #results {
     display:grid;
-    margin: 0 auto;
-    width:100%
+    margin: 30px auto;
+    width:100%;
+  
 }
 
 .card {
-    height:100%;
-    width:100%;
     border:1px solid black;
-    margin:20px
+  height:100%
 }
 
 
@@ -83,7 +86,7 @@ li {
   }
   
   /* On screens that are 600px or less, set the background color to olive */
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 300px) {
     #results {
         grid-template-columns: 1fr ;
       }

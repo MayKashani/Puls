@@ -16,13 +16,16 @@ function renderResults(res) {
     results = document.querySelector('#results')
     results.innerHTML=''
     data = res;
-    console.log(data)
-    for (var i = 0; i < res.length; i++) {
+    for (var i = 0; i < res.length || 10 ; i++) {
         div = document.createElement('div')
         div.className = 'card'
         div.id=i
-        div.innerText = res[i].show.name
+        title = document.createElement('h3')
+        title.innerText =  res[i].show.name
+        div.appendChild(title)
+        
         div.addEventListener('click',function () { renderDetails(data[this.id].show)})
+        res[i].show.image!==null && res[i].show.image.medium!==null ? getImage(res[i].show.image.medium,div) : ""
         results.appendChild(div)
     }
 }
@@ -32,7 +35,7 @@ function renderErr() {
 }
 
 function renderDetails(show) {
-    //let image = show.image.medium ? getImage(show.image.medium) : ""
+    show.image.length>0 && show.image.medium!== null ? getImage(show.image.medium,d) : ""
 
     
     details = document.querySelector("#details")
@@ -58,16 +61,17 @@ function renderDetails(show) {
     
 }
 
-// function getImage(url) {
-//     axios.get(url)
-//     .then(res=> {
-//         img = document.createElement('img')
-//         img.src = res.data
-//         console.log(img)
-//         return img;
-//     }
-//     )
-// }
+function getImage(url,elem) {
+    fetch(url)
+    .then(res=>{
+        
+        img = document.createElement('img')
+        img.src = res.url
+        elem.appendChild(img)
+    }
+    )
+    
+}
 
 
 function closeModal(){
