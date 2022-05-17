@@ -1,6 +1,7 @@
 
 const modal = document.querySelector(".modal")
-const d = document.querySelector("#details")
+const details = document.querySelector("#details")
+const results = document.querySelector("#results")
 var data = ""
 
 function search() { 
@@ -13,32 +14,29 @@ function search() {
 }
 
 function renderResults(res) {
-    results = document.querySelector('#results')
     results.innerHTML=''
     data = res;
-    for (var i = 0; i < res.length || 10 ; i++) {
+    for (var i = 0; i < res.length && 10 ; i++) {
         div = document.createElement('div')
         div.className = 'card'
         div.id=i
         title = document.createElement('h3')
         title.innerText =  res[i].show.name
         div.appendChild(title)
-        
         div.addEventListener('click',function () { renderDetails(data[this.id].show)})
         res[i].show.image!==null && res[i].show.image.medium!==null ? getImage(res[i].show.image.medium,div) : ""
+
         results.appendChild(div)
     }
 }
 
 function renderErr() { 
-    document.querySelector('#results').innerText = 'No results'
+    results.innerText = 'No results'
 }
 
 function renderDetails(show) {
     show.image.length>0 && show.image.medium!== null ? getImage(show.image.medium,d) : ""
 
-    
-    details = document.querySelector("#details")
     details.innerHTML = '<span class="close" onclick="closeModal()"> Close</span>'
     
     h1 = document.createElement('h1')
@@ -62,15 +60,9 @@ function renderDetails(show) {
 }
 
 function getImage(url,elem) {
-    fetch(url)
-    .then(res=>{
-        
         img = document.createElement('img')
-        img.src = res.url
-        elem.appendChild(img)
-    }
-    )
-    
+        img.src = url
+        elem.appendChild(img)  
 }
 
 
@@ -86,9 +78,10 @@ function getCast(id){
             console.log(res.data[i])
             li = document.createElement('li')
             li.innerText = res.data[i].person.name +" as "+ res.data[i].character.name
+            getImage(res.data[i].person.image.medium,li)
             ul.appendChild(li)
         }
-        d.appendChild(ul)
+        details.appendChild(ul)
 
     })
 }

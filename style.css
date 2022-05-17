@@ -15,8 +15,11 @@
 
 img {
   height: 50%;
-  width: auto
+  width: auto;
+  margin:0 auto;
 }
+
+
 #main {
     margin: 30px auto;
     width: 80%;
@@ -59,16 +62,21 @@ img {
 
 ul {
     list-style-type: none;
-  
+    display:inline-table;
     overflow-x: scroll;
 }
 
 
 li {
 
+  height:200px;
+  width:auto;
+  float:left;
+  display:grid;
+  grid-template-rows: auto 1fr;
     border:1px solid black;
-    margin:10px
-    
+    margin:5px;
+
 }
   /* On screens that are 992px or less, set the background color to blue */
 
